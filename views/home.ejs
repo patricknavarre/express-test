@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <% include ./partials/head %>
+
+  <body class="text-center">
+    
+    <div class="container">
+      <header
+        class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm"
+      >
+        <p class="h5 my-0 me-md-auto fw-normal">WEATHER API</p>
+
+        <% if (user) { %>
+        <nav class="my-2 my-md-0 me-md-3">
+          WELCOME!! <a href="#" class="p-2 text-dark"> <%- user %> </a>
+        </nav>
+        <a class="btn btn-outline-primary" href="/users/logout">LOGOUT</a>
+        <% } else { %>
+          <nav class="my-2 my-md-0 me-md-3">
+            <a class="btn btn-outline-primary" href="/users/login">SIGN IN</a>
+        </nav>
+            <a class="btn btn-outline-primary" href="/users/create-user">SIGN UP</a>
+        <% } %>
+      </header>
+    </div>
+
+
+    <h1>HOME PAGE</h1>
+
+
+    <div class="container">
+
+      <form method="POST" action="/users/home">
+        <div class="input-group mb-3">
+          <input type="text" name="search" class="form-control" placeholder="Enter City To Search Weather" aria-label="Search" aria-describedby="search">
+          <button class="btn btn-primary" id="search" type="submit">Search</button>
+        </div>
+      </form>
+
+      <% if (data) { %>
+        <div class="row">
+          <% data.data.forEach(function(item) { %>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <div><img src="<%= item.images.original.url %>" /></div>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <% })%>
+        </div>
+        <% } %>
+
+    </div>
+
+
+<!-- <script>
+  function clickMe(){
+    console.log("clicked");
+  }
+
+</script> -->
+
+    <% include ./partials/scripts %> 
+    
+  </body>
+</html>
